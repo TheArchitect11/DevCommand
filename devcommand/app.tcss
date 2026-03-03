@@ -1,0 +1,83 @@
+/* DevCommand — main application stylesheet */
+
+/* ================================================================
+   Layout: CSS Grid  (3 columns × 2 rows)
+   Row 1:  System  | Docker | Git
+   Row 2:  Server  | Todo   | (Todo spans)
+   ================================================================ */
+
+Screen {
+    layout: grid;
+    grid-size: 3 2;
+    grid-gutter: 1;
+    padding: 1;
+}
+
+Header {
+    column-span: 3;
+    dock: top;
+}
+
+Footer {
+    column-span: 3;
+    dock: bottom;
+}
+
+/* ================================================================
+   Panel containers
+   ================================================================ */
+
+.panel {
+    border: solid $accent;
+    padding: 1 2;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.panel-title {
+    text-style: bold;
+    color: $text;
+    margin-bottom: 1;
+}
+
+/* --- individual panel slots --- */
+
+#panel-system {
+    border: solid $success;
+}
+
+#panel-docker {
+    border: solid $warning;
+}
+
+#panel-git {
+    border: solid $primary;
+}
+
+#panel-server {
+    border: solid $accent;
+}
+
+#panel-todo {
+    border: solid $secondary;
+    column-span: 2;
+}
+
+/* ================================================================
+   Error banner
+   ================================================================ */
+
+#error-banner {
+    dock: bottom;
+    column-span: 3;
+    height: auto;
+    max-height: 4;
+    background: $error;
+    color: $text;
+    padding: 0 2;
+    display: none;
+}
+
+#error-banner.visible {
+    display: block;
+}

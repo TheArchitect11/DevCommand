@@ -1,0 +1,90 @@
+/* DevCommand — main application layout
+ *
+ * CSS Grid: 3 columns × 2 rows
+ * Row 1: Git | Docker | System
+ * Row 2: Todo | Server | Logs
+ */
+
+Screen {
+    layout: grid;
+    grid-size: 3 2;
+    grid-gutter: 1;
+    padding: 1;
+}
+
+Header {
+    column-span: 3;
+    dock: top;
+}
+
+Footer {
+    column-span: 3;
+    dock: bottom;
+}
+
+/* ================================================================
+   Panel containers
+   ================================================================ */
+
+.panel {
+    border: solid $accent;
+    padding: 1 2;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.panel-title {
+    text-style: bold;
+    color: $text;
+    margin-bottom: 1;
+}
+
+.panel-error {
+    color: $error;
+    text-style: italic;
+}
+
+/* --- individual panel theming --- */
+
+#panel-git {
+    border: solid $primary;
+}
+
+#panel-docker {
+    border: solid $warning;
+}
+
+#panel-system {
+    border: solid $success;
+}
+
+#panel-todo {
+    border: solid $secondary;
+}
+
+#panel-server {
+    border: solid $accent;
+}
+
+#panel-logs {
+    border: solid $primary-lighten-2;
+}
+
+/* ================================================================
+   Error banner (docked at bottom, hidden by default)
+   ================================================================ */
+
+#error-banner {
+    dock: bottom;
+    column-span: 3;
+    height: auto;
+    max-height: 4;
+    background: $error;
+    color: $text;
+    padding: 0 2;
+    display: none;
+}
+
+#error-banner.visible {
+    display: block;
+}

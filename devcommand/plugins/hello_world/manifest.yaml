@@ -1,0 +1,12 @@
+name: hello_world
+version: "0.1.0"
+description: Example plugin demonstrating the plugin system
+author: DevCommand Team
+entry_point: "plugin:HelloWorldPlugin"
+min_app_version: "0.1.0"
+capabilities:
+  panels:
+    - HelloPanel
+  services: []
+  event_handlers: []
+dependencies: []
