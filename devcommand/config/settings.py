@@ -62,7 +62,10 @@ class UISettings(BaseModel):
         default=1.0, ge=0.25, le=30.0,
         description="Global UI refresh interval in seconds",
     )
-    theme: str = Field(default="dark", description="UI theme (dark / light / nord / dracula / solarized)")
+    theme: str = Field(
+        default="dark",
+        description="UI theme (dark / light / nord / dracula / solarized)",
+    )
     show_header: bool = Field(default=True, description="Show the app header")
     show_footer: bool = Field(default=True, description="Show the app footer")
     enabled_panels: list[str] = Field(
@@ -137,7 +140,7 @@ class AppSettings(BaseModel):
 
 def _load_yaml(path: Path) -> dict[str, Any]:
     """Load a YAML config file. Requires PyYAML (optional dep)."""
-    import yaml  # noqa: TCH002 — intentionally imported at call-time
+    import yaml
 
     with open(path, encoding="utf-8") as f:
         data: dict[str, Any] = yaml.safe_load(f) or {}

@@ -27,9 +27,10 @@ import functools
 import logging
 import time
 from collections import defaultdict
+from collections.abc import Generator
 from contextlib import contextmanager
-from dataclasses import dataclass, field
-from typing import Any, Generator
+from dataclasses import dataclass
+from typing import Any
 
 logger = logging.getLogger(__name__)
 

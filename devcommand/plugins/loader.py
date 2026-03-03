@@ -274,10 +274,9 @@ def _audit_source(
                     violations.append(
                         f"line {node.lineno}: import {alias.name}"
                     )
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                top = node.module.split(".")[0]
-                if top in blocked:
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            top = node.module.split(".")[0]
+            if top in blocked:
                     violations.append(
                         f"line {node.lineno}: from {node.module} import …"
                     )

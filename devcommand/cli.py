@@ -10,7 +10,6 @@ designed to be self-contained — it does **not** start Textual.
 from __future__ import annotations
 
 import argparse
-import sys
 from dataclasses import dataclass
 from pathlib import Path
 

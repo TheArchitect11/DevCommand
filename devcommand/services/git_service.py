@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -114,7 +114,10 @@ class GitService(BaseService):
         try:
             for diff in repo.index.diff("HEAD"):
                 staged.append(
-                    FileChange(path=diff.a_path or diff.b_path or "", change_type=diff.change_type or "M")
+                    FileChange(
+                        path=diff.a_path or diff.b_path or "",
+                        change_type=diff.change_type or "M",
+                    )
                 )
         except Exception:
             pass  # empty repo / no HEAD
@@ -124,7 +127,10 @@ class GitService(BaseService):
         try:
             for diff in repo.index.diff(None):
                 modified.append(
-                    FileChange(path=diff.a_path or diff.b_path or "", change_type=diff.change_type or "M")
+                    FileChange(
+                        path=diff.a_path or diff.b_path or "",
+                        change_type=diff.change_type or "M",
+                    )
                 )
         except Exception:
             pass
@@ -147,10 +153,9 @@ class GitService(BaseService):
 
         # Stash count
         stash_count = 0
-        try:
+        import contextlib
+        with contextlib.suppress(Exception):
             stash_count = len(list(repo.git.stash("list").splitlines()))
-        except Exception:
-            pass
 
         return GitStatus(
             available=True,
@@ -174,6 +179,6 @@ class GitService(BaseService):
             message=commit.message.strip().split("\n")[0],
             author=str(commit.author),
             timestamp=datetime.fromtimestamp(
-                commit.committed_date, tz=timezone.utc
+                commit.committed_date, tz=UTC
             ),
         )

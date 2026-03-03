@@ -54,10 +54,9 @@ class BasePanel(Static):
             self.update(content)
         except Exception as exc:
             logger.exception("Panel %s render error", self.id)
-            try:
+            import contextlib
+            with contextlib.suppress(Exception):
                 self.update(Text(f"⚠ Error: {exc}", style="bold red"))
-            except Exception:
-                pass  # Outside running app context — nothing to update
 
     def build_content(self) -> Text:
         """Override in subclass to return a Rich renderable.

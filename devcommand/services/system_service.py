@@ -12,7 +12,6 @@ import asyncio
 import logging
 import time
 from datetime import datetime
-from typing import Any
 
 import psutil
 
@@ -94,8 +93,9 @@ class SystemService(BaseService):
         # Top processes by CPU — best-effort, skip permission errors
         procs: list[ProcessInfo] = []
         try:
-            for p in psutil.process_iter(["pid", "name", "cpu_percent", "memory_percent", "status"]):
-                info = p.info  # type: ignore[attr-defined]
+            attrs = ["pid", "name", "cpu_percent", "memory_percent", "status"]
+            for p in psutil.process_iter(attrs):
+                info = p.info
                 procs.append(
                     ProcessInfo(
                         pid=info["pid"],

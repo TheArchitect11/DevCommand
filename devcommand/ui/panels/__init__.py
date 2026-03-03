@@ -12,7 +12,7 @@ __all__ = [
     "GitPanel",
     "LogsPanel",
     "ServerPanel",
+    "StateLogHandler",
     "SystemPanel",
     "TodoPanel",
-    "StateLogHandler",
 ]

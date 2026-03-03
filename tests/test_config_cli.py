@@ -8,11 +8,10 @@ from pathlib import Path
 
 import pytest
 
-from devcommand.cli import CLIArgs, parse_args
-from devcommand.config.settings import AppSettings, SchedulerSettings, PluginSettings, load_settings
+from devcommand.cli import parse_args
+from devcommand.config.settings import AppSettings, PluginSettings, SchedulerSettings
 from devcommand.config.themes import available_themes, get_theme
 from devcommand.utils.profiling import Profiler, timed
-
 
 # ---------------------------------------------------------------------------
 # Config tests
@@ -26,7 +25,7 @@ class TestAppSettings:
         assert s.plugins.enabled is True
 
     def test_scheduler_bounds(self) -> None:
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             SchedulerSettings(tick_interval=0.1)  # below ge=0.5
 
     def test_plugin_disabled_list(self) -> None:

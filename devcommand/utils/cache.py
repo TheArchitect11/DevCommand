@@ -21,7 +21,7 @@ T = TypeVar("T")
 class _CacheEntry(Generic[T]):
     """Internal wrapper holding a cached value and its expiry timestamp."""
 
-    __slots__ = ("value", "expires_at")
+    __slots__ = ("expires_at", "value")
 
     def __init__(self, value: T, ttl: float) -> None:
         self.value = value

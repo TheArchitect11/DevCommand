@@ -32,7 +32,7 @@ class PluginState(StrEnum):
 class PluginEntry:
     """Wrapper tracking a plugin and its lifecycle state."""
 
-    __slots__ = ("plugin", "state", "error")
+    __slots__ = ("error", "plugin", "state")
 
     def __init__(self, plugin: BasePlugin, state: PluginState = PluginState.LOADED) -> None:
         self.plugin = plugin

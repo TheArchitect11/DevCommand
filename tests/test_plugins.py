@@ -2,17 +2,15 @@
 
 from __future__ import annotations
 
-import asyncio
 from pathlib import Path
-from unittest.mock import AsyncMock
 
 import pytest
 
 from devcommand.core.base_plugin import BasePlugin
 from devcommand.core.event_bus import EventBus
-from devcommand.plugins.loader import PluginLoader, PluginLoadError
+from devcommand.plugins.loader import PluginLoader
 from devcommand.plugins.manifest import PluginManifest
-from devcommand.plugins.registry import PluginRegistry, PluginState
+from devcommand.plugins.registry import PluginRegistry
 
 
 class TestPluginManifest:

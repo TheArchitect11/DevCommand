@@ -15,6 +15,7 @@ The :class:`ServiceScheduler` replaces the inline refresh loop in
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import logging
 import time
 from collections.abc import Awaitable, Callable
@@ -150,10 +151,8 @@ class ServiceScheduler:
         self._running = False
         if self._task is not None:
             self._task.cancel()
-            try:
+            with contextlib.suppress(asyncio.CancelledError):
                 await self._task
-            except asyncio.CancelledError:
-                pass
             self._task = None
         logger.info("Scheduler stopped after %d tick(s)", self._tick_count)
 
@@ -211,8 +210,8 @@ class ServiceScheduler:
 
         # Collect successful results
         results: dict[str, dict[str, Any]] = {}
-        for (name, _task), result in zip(tasks.items(), raw_results):
-            if isinstance(result, Exception):
+        for (name, _task), result in zip(tasks.items(), raw_results, strict=False):
+            if isinstance(result, BaseException):
                 logger.debug("Scheduler: job '%s' returned exception (already handled)", name)
             elif result is not None:
                 results[name] = result
@@ -252,7 +251,7 @@ class ServiceScheduler:
             job.record_success()
             return result
 
-        except asyncio.TimeoutError:
+        except TimeoutError:
             elapsed = time.monotonic() - start
             logger.error(
                 "Scheduler: '%s' timed out after %.1fs (limit=%.1fs)",

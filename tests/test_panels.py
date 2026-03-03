@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from devcommand.core.state import AppState
-from devcommand.ui.panels.git_panel import GitPanel
-from devcommand.ui.panels.docker_panel import DockerPanel
-from devcommand.ui.panels.system_panel import SystemPanel
-from devcommand.ui.panels.server_panel import ServerPanel
-from devcommand.ui.panels.todo_panel import TodoPanel
-from devcommand.ui.panels.logs_panel import LogsPanel
-
 from rich.text import Text
+
+from devcommand.core.state import AppState
+from devcommand.ui.panels.docker_panel import DockerPanel
+from devcommand.ui.panels.git_panel import GitPanel
+from devcommand.ui.panels.logs_panel import LogsPanel
+from devcommand.ui.panels.server_panel import ServerPanel
+from devcommand.ui.panels.system_panel import SystemPanel
+from devcommand.ui.panels.todo_panel import TodoPanel
 
 
 def _make_panel(cls, state=None):

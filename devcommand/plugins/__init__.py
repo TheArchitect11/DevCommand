@@ -9,8 +9,8 @@ from devcommand.plugins.manifest import PluginManifest
 from devcommand.plugins.registry import PluginRegistry, PluginState
 
 __all__ = [
-    "PluginLoader",
     "PluginLoadError",
+    "PluginLoader",
     "PluginManifest",
     "PluginRegistry",
     "PluginState",

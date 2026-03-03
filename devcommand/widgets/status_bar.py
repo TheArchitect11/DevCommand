@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from textual.widgets import Static
 
 
@@ -22,7 +24,7 @@ class StatusBar(Static):
     }
     """
 
-    def __init__(self, text: str = "Ready", **kwargs: object) -> None:
+    def __init__(self, text: str = "Ready", **kwargs: Any) -> None:
         super().__init__(text, **kwargs)
 
     def update_status(self, text: str) -> None:

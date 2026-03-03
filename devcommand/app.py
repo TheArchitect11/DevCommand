@@ -3,7 +3,7 @@
 This module bootstraps the TUI:
 
 1. ``main()`` parses CLI flags, loads config, initialises logging
-2. ``DevCommandApp`` composes six panels in a 3×2 CSS grid
+2. ``DevCommandApp`` composes six panels in a 3x2 CSS grid
 3. On mount it logs platform info, binds state to panels, and
    installs the log handler so the LogsPanel receives messages.
 4. Error isolation: any panel crash is caught and rendered locally.
@@ -15,10 +15,11 @@ Data flow (prepared for async services)::
 
 from __future__ import annotations
 
+import contextlib
 import logging
 import sys
 from pathlib import Path
-from typing import Any, ClassVar
+from typing import ClassVar
 
 from textual.app import App, ComposeResult
 from textual.binding import Binding
@@ -71,7 +72,7 @@ class DevCommandApp(App[None]):
     SUB_TITLE = "Developer Command Center"
     CSS_PATH: ClassVar[str] = "ui/layout.css"
 
-    BINDINGS: ClassVar[list[Binding]] = [
+    BINDINGS = [
         Binding("q", "quit", "Quit", show=True),
         Binding("d", "toggle_dark", "Toggle Dark", show=True),
         Binding("r", "refresh_panels", "Refresh", show=True),
@@ -180,10 +181,8 @@ class DevCommandApp(App[None]):
 
     def action_focus_panel(self, panel_id: str) -> None:
         """Focus a panel by ID (keys 1-6)."""
-        try:
+        with contextlib.suppress(Exception):
             self.query_one(f"#{panel_id}").focus()
-        except Exception:
-            pass
 
     def action_cycle_theme(self) -> None:
         """Cycle through available themes."""

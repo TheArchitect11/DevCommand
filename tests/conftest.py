@@ -8,10 +8,8 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 
 from devcommand.config.settings import AppSettings
-from devcommand.core.app_state import AppState
 from devcommand.core.event_bus import EventBus
 from devcommand.core.scheduler import JobConfig, ServiceScheduler
-
 
 # ---------------------------------------------------------------------------
 # Config fixtures
